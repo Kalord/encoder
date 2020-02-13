@@ -15,8 +15,12 @@ private:
      * Текущий файл
      **/
     std::fstream file;
+    /**
+     * Путь до файла
+     **/
+    std::string pathToFile;
 public:
-    File(const std::string& pathToFile);
+    File(std::string pathToFile);
     ~File();
 
     bool isOpen();
@@ -24,4 +28,5 @@ public:
     std::string read(u_int64_t start, u_int64_t end);
     void rewrite(u_int64_t start, u_int64_t end, const std::string& content);
     void append(const std::string& content);
+    void rename(std::string newName);
 };

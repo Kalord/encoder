@@ -1,8 +1,9 @@
 #include "File.hpp"
 
-File::File(const std::string& pathToFile)
+File::File(std::string pathToFile)
 {
     this->file.open(pathToFile, std::ios_base::in | std::ios_base::out | std::ios_base::binary);
+    this->pathToFile = pathToFile;
 }
 
 File::~File()
@@ -54,4 +55,9 @@ void File::append(const std::string& content)
 {
     this->file.seekg(0, std::ios_base::end);
     this->file << content;
+}
+
+void File::rename(std::string newName)
+{
+    std::rename(this->pathToFile.c_str(), newName.c_str());
 }
