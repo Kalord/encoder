@@ -32,7 +32,7 @@ std::string File::read(u_int64_t start, u_int64_t end)
     char symbol;
     this->file.seekg(start, std::ios_base::beg);
 
-    u_int64_t counter = end - start;
+    u_int64_t counter = end - start + 1;
     while(!this->file.eof() && counter-- > 0)
     {
         this->file >> symbol;
@@ -40,4 +40,18 @@ std::string File::read(u_int64_t start, u_int64_t end)
     }
 
     return content;
+}
+
+void File::rewrite(u_int64_t start, u_int64_t end, const std::string& content)
+{
+    if(end - start + 1 != content.length()) return;
+
+    this->file.seekg(start, std::ios_base::beg);
+    this->file << content;
+}
+
+void File::append(const std::string& content)
+{
+    this->file.seekg(0, std::ios_base::end);
+    this->file << content;
 }

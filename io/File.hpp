@@ -22,4 +22,6 @@ public:
     bool isOpen();
     size_t getSize();
     std::string read(u_int64_t start, u_int64_t end);
+    void rewrite(u_int64_t start, u_int64_t end, const std::string& content);
+    void append(const std::string& content);
 };
